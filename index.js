@@ -24,6 +24,17 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+app.get('/api/whoami/', function(req, res, next){
+  let list_of_l = ['Spanish', 'English'];
+  console.log("the ip is: ",req.ip);
+  console.log(req.get('Language'));
+  console.log(req.get('Software'));
+  console.log(req.acceptsLanguages(list_of_l));
+  let ip_adress = req.ip;
+  res.json({ipaddress:ip_adress,language:req.get('Accept-Language'),software:req.get('User-Agent')});
+
+})
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
